@@ -15,21 +15,26 @@ const useSemiPersistentState = () => {
     localStorage.setItem("savedTodoList", JSON.stringify(todoList));
   }, [todoList]);
 
-  return [todoList, setTodoList]; 
+  return [todoList, setTodoList];
 };
 
 const App = () => {
-  
   const [todoList, setTodoList] = useSemiPersistentState();
+
   const addTodo = (newTodo) => {
     setTodoList((prevList) => [...prevList, newTodo]);
+  };
+
+  const removeTodo = (id) => {
+    const updatedTodoList = todoList.filter((todo) => todo.id !== id);
+    setTodoList(updatedTodoList);
   };
 
   return (
     <>
       <h1>Todo List</h1>
       <AddTodoForm onAddTodo={addTodo} />
-      <TodoList todoList={todoList} />
+      <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
     </>
   );
 };
