@@ -102,11 +102,6 @@ const App = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem("savedTodoList", JSON.stringify(todoList));
-    }
-  }, [todoList, isLoading]);
 
   return (
     <>
