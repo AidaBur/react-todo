@@ -1,0 +1,20 @@
+.ListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #222;
+  font-size: 1.2rem;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+}
+
+.removeButton:hover {
+  color: #ffffff;
+}
