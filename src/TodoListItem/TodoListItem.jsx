@@ -4,7 +4,7 @@ import styles from "./TodoListItem.module.css";
 
 const TodoListItem = ({ todo, onRemoveTodo }) => {
   return (
-    <li className={styles.ListItem}>
+    <li className={styles.listItem}>
       <FaCheckCircle style={{ marginRight: "8px", color: "#3E89FF" }} />
       {todo.title}
       <button
