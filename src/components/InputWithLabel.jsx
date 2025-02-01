@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const InputWithLabel = (props) => {
   const inputRef = useRef();
@@ -20,5 +21,13 @@ const InputWithLabel = (props) => {
     </>
   );
 };
+
+InputWithLabel.propTypes = {
+  id: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  children: PropTypes.node,
+};
+
 
 export default InputWithLabel;
