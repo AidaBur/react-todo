@@ -8,6 +8,7 @@ const AddTodoForm = (props) => {
 
   const handleAddTodo = (event) => {
     event.preventDefault();
+    
     const newTodo = {
       title: todoTitle,
       id: Date.now(),
