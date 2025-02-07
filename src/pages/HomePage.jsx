@@ -1,18 +1,22 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css";
-import girlWithLaptop from "../assets/images/girl-with-laptop.png"; 
+import girlWithLaptop from "../assets/images/girl-with-laptop.png";
 
 const HomePage = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleGetStartedClick = () => {
-    navigate("/todos"); 
+    navigate("/todos");
   };
 
   return (
     <div className={styles.container}>
-      <img src={girlWithLaptop} alt="Girl with laptop" className={styles.image} />
+      <img
+        src={girlWithLaptop}
+        alt="Girl with laptop"
+        className={styles.image}
+      />
       <h1 className={styles.title}>
         Organizing your day activity <br /> with Todo Daily
       </h1>
