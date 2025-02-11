@@ -1,14 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+
 body {
   background-color: #f7f9fc;
   color: #333;
-  font-family: "Roboto", sans-serif;
-  margin: 0;
+  font-family: "Inter", sans-serif;
+  margin: 0 auto;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   text-align: center;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 h1,
@@ -22,17 +26,17 @@ h3 {
 }
 
 button {
-  background-color: #3e89ff;
+  background-color: #5f33e1;
   color: white;
   padding: 10px 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   font-size: 1rem;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #0056b3;
+  color: #4a28b2;
 }
 
 input {
@@ -54,10 +58,13 @@ ul {
 li {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px;
 }
 
 li button {
-  margin-left: 10px;
+  margin-left: auto;
 }
 
 @media (max-width: 768px) {
@@ -93,12 +100,15 @@ li button {
   }
 
   li {
-    flex-direction: row;
+    display: flex;
     align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 10px;
   }
 
   li button {
-    margin-left: 10px;
+    margin-left: auto;
     margin-top: 0;
   }
 }

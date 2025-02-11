@@ -33,9 +33,13 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
+
+  .card {
+    width: 100%;
+    max-width: 500px; 
+  }
+  
+
 
 .read-the-docs {
   color: #888;

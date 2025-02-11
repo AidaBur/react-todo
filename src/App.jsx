@@ -36,6 +36,7 @@ const App = () => {
       const todos = data.records.map((record) => ({
         id: record.id,
         title: record.fields.title || "Untitled",
+        completed: record.fields.completed || false,
       }));
 
       setTodoList(todos);
@@ -55,6 +56,7 @@ const App = () => {
       body: JSON.stringify({
         fields: {
           title: newTodo.title,
+          completed: false,
         },
       }),
     };
@@ -75,6 +77,7 @@ const App = () => {
       const addedTodo = {
         id: data.id,
         title: data.fields.title,
+        completed: data.fields.completed,
       };
 
       setTodoList((prevList) => {
@@ -116,6 +119,44 @@ const App = () => {
     }
   };
 
+  const toggleComplete = async (id, completed) => {
+    const options = {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fields: {
+          completed: completed, 
+        },
+      }),
+    };
+
+    const url = `https://api.airtable.com/v0/${
+      import.meta.env.VITE_AIRTABLE_BASE_ID
+    }/${import.meta.env.VITE_TABLE_NAME}/${id}`;
+
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      const updatedTodo = await response.json();
+
+      setTodoList((prevList) =>
+        prevList.map((todo) =>
+          todo.id === id
+            ? { ...todo, completed: updatedTodo.fields.completed }
+            : todo
+        )
+      );
+    } catch (error) {
+      console.error("Error updating todo:", error.message);
+    }
+  };
+
   const toggleSortOrder = () => {
     setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   };
@@ -127,10 +168,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* homepage */}
         <Route path="/" element={<HomePage />} />
-
-        {/* todo */}
         <Route
           path="/todos"
           element={
@@ -144,7 +182,11 @@ const App = () => {
               {isLoading ? (
                 <p>Loading...</p>
               ) : (
-                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+                <TodoList
+                  todoList={todoList}
+                  onRemoveTodo={removeTodo}
+                  onToggleComplete={toggleComplete}
+                />
               )}
             </>
           }

@@ -1,32 +1,37 @@
-import React, { useState } from 'react';
-import InputWithLabel from './InputWithLabel';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { FaPlus } from "react-icons/fa";
+import styles from "./AddTodoForm.module.css";
 
-
-const AddTodoForm = (props) => {
-  const [todoTitle, setTodoTitle] = useState('');
+const AddTodoForm = ({ onAddTodo }) => {
+  const [todoTitle, setTodoTitle] = useState("");
 
   const handleAddTodo = (event) => {
     event.preventDefault();
-    
+    if (!todoTitle.trim()) return;
+
     const newTodo = {
       title: todoTitle,
       id: Date.now(),
     };
-    props.onAddTodo(newTodo);
-    setTodoTitle('');
+
+    onAddTodo(newTodo);
+    setTodoTitle("");
   };
 
   return (
-    <form onSubmit={handleAddTodo}>
-      <InputWithLabel 
+    <form onSubmit={handleAddTodo} className={styles.form}>
+      <input
         id="todo-title"
-        value={todoTitle} 
+        type="text"
+        value={todoTitle}
         onChange={(e) => setTodoTitle(e.target.value)}
-      >
-        Title
-      </InputWithLabel>
-      <button type="submit">Add Todo</button>
+        placeholder="Title"
+        className={styles.input}
+      />
+      <button type="submit" className={styles.button}>
+        <FaPlus />
+      </button>
     </form>
   );
 };
