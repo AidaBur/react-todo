@@ -6,6 +6,8 @@ import HomePage from "./pages/HomePage";
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
+  const [editTodo, setEditTodo] = useState(null); // Добавлено: состояние для редактируемой задачи
+  const [editTitle, setEditTitle] = useState(""); // Добавлено: состояние для текста редактируемого заголовка
   const [isLoading, setIsLoading] = useState(true);
   const [sortOrder, setSortOrder] = useState("asc");
 
@@ -119,6 +121,52 @@ const App = () => {
     }
   };
 
+  // Добавлено: обработка редактирования задачи
+  const editTodoHandler = (todo) => {
+    setEditTodo(todo); // Устанавливаем задачу для редактирования
+    setEditTitle(todo.title); // Устанавливаем текущий заголовок задачи в поле редактирования
+  };
+
+  // Добавлено: сохранение изменений редактируемой задачи
+  const saveEditHandler = async () => {
+    const options = {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fields: {
+          title: editTitle, // Сохраняем новый заголовок
+        },
+      }),
+    };
+
+    const url = `https://api.airtable.com/v0/${
+      import.meta.env.VITE_AIRTABLE_BASE_ID
+    }/${import.meta.env.VITE_TABLE_NAME}/${editTodo.id}`;
+
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      const updatedTodo = await response.json();
+      setTodoList((prevList) =>
+        prevList.map((todo) =>
+          todo.id === updatedTodo.id
+            ? { ...todo, title: updatedTodo.fields.title }
+            : todo
+        )
+      );
+      setEditTodo(null); // Закрываем форму редактирования
+      setEditTitle(""); // Очищаем поле редактирования
+    } catch (error) {
+      console.error("Error updating todo:", error.message);
+    }
+  };
+
   const toggleComplete = async (id, completed) => {
     const options = {
       method: "PATCH",
@@ -186,7 +234,22 @@ const App = () => {
                   todoList={todoList}
                   onRemoveTodo={removeTodo}
                   onToggleComplete={toggleComplete}
+                  onEditTodo={editTodoHandler} // Передаем обработчик редактирования
                 />
+              )}
+
+              {/* Добавлено: форма для редактирования задачи */}
+              {editTodo && (
+                <div>
+                  <h2>Edit Todo</h2>
+                  <input
+                    type="text"
+                    value={editTitle}
+                    onChange={(e) => setEditTitle(e.target.value)}
+                  />
+                  <button onClick={saveEditHandler}>Save</button>
+                  <button onClick={() => setEditTodo(null)}>Cancel</button>
+                </div>
               )}
             </>
           }

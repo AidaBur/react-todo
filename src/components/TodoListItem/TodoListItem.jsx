@@ -1,9 +1,10 @@
+// TodoListItem/TodoListItem.js
 import React from "react";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaEdit } from "react-icons/fa";  // Добавим иконку редактирования
 import PropTypes from "prop-types";
 import styles from "./TodoListItem.module.css";
 
-const TodoListItem = ({ todo, onRemoveTodo, onToggleComplete }) => {
+const TodoListItem = ({ todo, onRemoveTodo, onToggleComplete, onEditTodo }) => {
   return (
     <li className={styles.listItem}>
       <div className={styles.taskContent}>
@@ -17,13 +18,23 @@ const TodoListItem = ({ todo, onRemoveTodo, onToggleComplete }) => {
           {todo.title}
         </span>
       </div>
-      <button
-        type="button"
-        onClick={() => onRemoveTodo(todo.id)}
-        className={styles.removeButton}
-      >
-        <FaTrash />
-      </button>
+      <div className={styles.buttonsContainer}>
+        <button
+          type="button"
+          onClick={() => onRemoveTodo(todo.id)}
+          className={styles.removeButton}
+        >
+          <FaTrash />
+        </button>
+        {/* Кнопка редактирования */}
+        <button
+          type="button"
+          onClick={() => onEditTodo(todo)}  // Вызов функции редактирования
+          className={styles.editButton}
+        >
+          <FaEdit />
+        </button>
+      </div>
     </li>
   );
 };
@@ -36,6 +47,7 @@ TodoListItem.propTypes = {
   }).isRequired,
   onRemoveTodo: PropTypes.func.isRequired,
   onToggleComplete: PropTypes.func.isRequired,
+  onEditTodo: PropTypes.func.isRequired,  // Добавляем обработчик редактирования
 };
 
 export default TodoListItem;

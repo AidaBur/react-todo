@@ -1,6 +1,6 @@
 .listItem {
   display: flex;
-  justify-content: flex-start; 
+  justify-content: flex-start;
   align-items: center;
   color: #222;
   font-size: 1.2rem;
@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
 .checkbox {
@@ -31,7 +31,7 @@
   border: none;
   color: #b9b9b9;
   cursor: pointer;
-  margin-left: auto; 
+  margin-left: auto;
 }
 
 .removeButton:hover {
@@ -42,4 +42,26 @@
   color: gray;
   font-size: 0.9rem;
   margin-top: 4px;
+}
+
+.editButton {
+  background: none;
+  border: none;
+  color: #b9b9b9;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 10px;
+  outline: none;
+}
+
+.editButton:hover {
+  color: #4a28b2;
+}
+
+.editButton:focus {
+  outline: none;
+}
+
+.editButton .icon {
+  font-size: 1.5rem;
 }
