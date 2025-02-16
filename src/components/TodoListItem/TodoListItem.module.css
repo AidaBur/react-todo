@@ -38,12 +38,6 @@
   color: #4a28b2;
 }
 
-.date {
-  color: gray;
-  font-size: 0.9rem;
-  margin-top: 4px;
-}
-
 .editButton {
   background: none;
   border: none;
@@ -64,4 +58,36 @@
 
 .editButton .icon {
   font-size: 1.5rem;
+}
+
+/* Стили для формы редактирования */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  gap: 10px;
+}
+
+.editInput {
+  padding: 5px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.saveButton {
+  background-color: #4a28b2;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.saveButton:hover {
+  background-color: #7a4ed1;
 }
