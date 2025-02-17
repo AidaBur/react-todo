@@ -6,8 +6,8 @@ import HomePage from "./pages/HomePage";
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
-  const [editTodo, setEditTodo] = useState(null); // Добавлено: состояние для редактируемой задачи
-  const [editTitle, setEditTitle] = useState(""); // Добавлено: состояние для текста редактируемого заголовка
+  const [editTodo, setEditTodo] = useState(null);
+  const [editTitle, setEditTitle] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [sortOrder, setSortOrder] = useState("asc");
 
@@ -121,14 +121,14 @@ const App = () => {
     }
   };
 
-  // Добавлено: обработка редактирования задачи
   const editTodoHandler = (todo) => {
-    setEditTodo(todo); // Устанавливаем задачу для редактирования
-    setEditTitle(todo.title); // Устанавливаем текущий заголовок задачи в поле редактирования
+    setEditTodo(todo);
+    setEditTitle(todo.title);
   };
 
-  // Добавлено: сохранение изменений редактируемой задачи
-  const saveEditHandler = async () => {
+  const saveEditHandler = async (todo, updatedTitle) => {
+    if (!todo || updatedTitle === todo.title) return;
+
     const options = {
       method: "PATCH",
       headers: {
@@ -137,14 +137,14 @@ const App = () => {
       },
       body: JSON.stringify({
         fields: {
-          title: editTitle, // Сохраняем новый заголовок
+          title: updatedTitle,
         },
       }),
     };
 
     const url = `https://api.airtable.com/v0/${
       import.meta.env.VITE_AIRTABLE_BASE_ID
-    }/${import.meta.env.VITE_TABLE_NAME}/${editTodo.id}`;
+    }/${import.meta.env.VITE_TABLE_NAME}/${todo.id}`;
 
     try {
       const response = await fetch(url, options);
@@ -153,15 +153,15 @@ const App = () => {
       }
 
       const updatedTodo = await response.json();
+
       setTodoList((prevList) =>
-        prevList.map((todo) =>
-          todo.id === updatedTodo.id
-            ? { ...todo, title: updatedTodo.fields.title }
-            : todo
+        prevList.map((t) =>
+          t.id === todo.id ? { ...t, title: updatedTodo.fields.title } : t
         )
       );
-      setEditTodo(null); // Закрываем форму редактирования
-      setEditTitle(""); // Очищаем поле редактирования
+
+      setEditTodo(null);
+      setEditTitle("");
     } catch (error) {
       console.error("Error updating todo:", error.message);
     }
@@ -176,7 +176,7 @@ const App = () => {
       },
       body: JSON.stringify({
         fields: {
-          completed: completed, 
+          completed: completed,
         },
       }),
     };
@@ -234,22 +234,9 @@ const App = () => {
                   todoList={todoList}
                   onRemoveTodo={removeTodo}
                   onToggleComplete={toggleComplete}
-                  onEditTodo={editTodoHandler} // Передаем обработчик редактирования
+                  onEditTodo={editTodoHandler}
+                  onSaveEdit={saveEditHandler}
                 />
-              )}
-
-              {/* Добавлено: форма для редактирования задачи */}
-              {editTodo && (
-                <div>
-                  <h2>Edit Todo</h2>
-                  <input
-                    type="text"
-                    value={editTitle}
-                    onChange={(e) => setEditTitle(e.target.value)}
-                  />
-                  <button onClick={saveEditHandler}>Save</button>
-                  <button onClick={() => setEditTodo(null)}>Cancel</button>
-                </div>
               )}
             </>
           }
