@@ -9,6 +9,9 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
   const [editableTodo, setEditableTodo] = useState(null);
   const [newTitle, setNewTitle] = useState("");
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
   const handleEditTodo = (todo) => {
     setEditableTodo(todo);
     setNewTitle(todo.title);
@@ -27,11 +30,24 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
     closeModal();
   };
 
+
+  const indexOfLastTodo = currentPage * itemsPerPage;
+  const indexOfFirstTodo = indexOfLastTodo - itemsPerPage;
+  const currentTodos = todoList.slice(indexOfFirstTodo, indexOfLastTodo);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(todoList.length / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+
   return (
     <div>
       <MenuBar />
       <ul className={styles.cardsContainer}>
-        {todoList.map((todo) => (
+        {currentTodos.map((todo) => (
           <TodoListItem
             key={todo.id}
             todo={todo}
@@ -41,6 +57,19 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
           />
         ))}
       </ul>
+
+      <div className={styles.pagination}>
+        {pageNumbers.map((number) => (
+          
+          <button
+            key={number}
+            onClick={() => paginate(number)}
+            className={number === currentPage ? styles.activePage : ""}
+          >
+            {number}
+          </button>
+        ))}
+      </div>
 
       {isModalOpen && editableTodo && (
         <div className={styles.modalOverlay}>
