@@ -2,7 +2,7 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background-color: #f7f3ea;
+  background-color: #F4F0FF
 }
 
 .container {
@@ -34,13 +34,14 @@ body {
   color: white;
   padding: 1rem 2rem;
   border: none;
-  border-radius: 20px;
+  border-radius: 30px;
   cursor: pointer;
   font-size: 1rem;
 }
 
 .button:hover {
   background-color: #4a28b2;
+  color: white;
 }
 .image {
   width: 100%;

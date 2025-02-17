@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
 
 body {
-  background-color: #f7f9fc;
+  background-color: #F4F0FF;
   color: #333;
   font-family: "Inter", sans-serif;
   margin: 0 auto;
@@ -26,7 +26,7 @@ h3 {
 }
 
 button {
-  background-color: #5f33e1;
+  background-color: #5F33E1;
   color: white;
   padding: 10px 16px;
   border: none;
@@ -37,6 +37,7 @@ button {
 
 button:hover {
   color: #4a28b2;
+  color: white;
 }
 
 input {

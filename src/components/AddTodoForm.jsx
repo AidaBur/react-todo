@@ -29,8 +29,8 @@ const AddTodoForm = ({ onAddTodo }) => {
         placeholder="Title"
         className={styles.input}
       />
-      <button type="submit" className={styles.button}>
-        <FaPlus />
+      <button type="submit" className={styles.addButton}>
+      <FaPlus className={styles.buttonIcon} />
       </button>
     </form>
   );

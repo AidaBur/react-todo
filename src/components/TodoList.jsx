@@ -29,27 +29,27 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
   return (
     <div>
       <ul className={styles.cardsContainer}>
-        {todoList.map((todo) => (
-          <TodoListItem
-            key={todo.id}
-            todo={todo}
-            onRemoveTodo={onRemoveTodo}
-            onToggleComplete={onToggleComplete}
-            onEditTodo={handleEditTodo}
-          />
-        ))}
+      {todoList.map((todo) => (
+        <TodoListItem
+          key={todo.id}
+          todo={todo}
+          onRemoveTodo={onRemoveTodo}
+          onToggleComplete={onToggleComplete}
+          onEditTodo={handleEditTodo}
+        />
+      ))}
       </ul>
 
       {isModalOpen && editableTodo && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
-            <h2>Edit Task</h2>
-            <input
-              type="text"
-              value={newTitle}
-              onChange={(e) => setNewTitle(e.target.value)}
-            />
-            <div>
+          <h2>Edit Task</h2>
+          <input
+            type="text"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
+          <div>
               <button onClick={handleSave}>Save</button>
               <button onClick={closeModal}>Cancel</button>
             </div>
