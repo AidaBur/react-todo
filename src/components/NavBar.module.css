@@ -1,0 +1,52 @@
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 1000;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navLinks li {
+  margin: 0 1rem;
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.navLinks .activeLink {
+  color: #8a2be2; 
+}
+
+.navLinks a:not(.activeLink) .icon {
+  color: gray;
+  transition: color 0.3s ease;
+}
+
+.navLinks a:not(.activeLink):hover .icon {
+  color: #5f33e1; 
+}
+
+.navLinks a:hover {
+  color: #ddd;
+}
+
+.logo h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import girlWithLaptop from "../assets/images/girl-with-laptop.png";
 

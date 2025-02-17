@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TodoListItem from "./TodoListItem/TodoListItem";
+import MenuBar from "./ NavBar";
 import PropTypes from "prop-types";
 import styles from "./TodoList.module.css";
 
@@ -28,28 +29,29 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
 
   return (
     <div>
+      <MenuBar />
       <ul className={styles.cardsContainer}>
-      {todoList.map((todo) => (
-        <TodoListItem
-          key={todo.id}
-          todo={todo}
-          onRemoveTodo={onRemoveTodo}
-          onToggleComplete={onToggleComplete}
-          onEditTodo={handleEditTodo}
-        />
-      ))}
+        {todoList.map((todo) => (
+          <TodoListItem
+            key={todo.id}
+            todo={todo}
+            onRemoveTodo={onRemoveTodo}
+            onToggleComplete={onToggleComplete}
+            onEditTodo={handleEditTodo}
+          />
+        ))}
       </ul>
 
       {isModalOpen && editableTodo && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
-          <h2>Edit Task</h2>
-          <input
-            type="text"
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-          />
-          <div>
+            <h2>Edit Task</h2>
+            <input
+              type="text"
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+            />
+            <div>
               <button onClick={handleSave}>Save</button>
               <button onClick={closeModal}>Cancel</button>
             </div>

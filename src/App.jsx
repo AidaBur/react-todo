@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AddTodoForm from "./components/AddTodoForm";
 import TodoList from "./components/TodoList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/ NavBar";
 import HomePage from "./pages/HomePage";
 
 const App = () => {
@@ -215,6 +216,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+    <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
