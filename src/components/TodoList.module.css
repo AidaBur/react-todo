@@ -80,4 +80,14 @@
     font-weight: normal;
   }
   
+  .cardsContainer {
+    min-height: 300px; 
+  }
+
+  .todoListContainer {
+    min-height: 500px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   

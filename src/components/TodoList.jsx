@@ -44,8 +44,9 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
 
 
   return (
-    <div>
+    <div className={styles.todoListContainer}> {/* Добавленный контейнер */}
       <MenuBar />
+      
       <ul className={styles.cardsContainer}>
         {currentTodos.map((todo) => (
           <TodoListItem
@@ -57,10 +58,9 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
           />
         ))}
       </ul>
-
+  
       <div className={styles.pagination}>
         {pageNumbers.map((number) => (
-          
           <button
             key={number}
             onClick={() => paginate(number)}
@@ -70,7 +70,7 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
           </button>
         ))}
       </div>
-
+  
       {isModalOpen && editableTodo && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
@@ -88,7 +88,7 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
         </div>
       )}
     </div>
-  );
+  );  
 };
 
 TodoList.propTypes = {
