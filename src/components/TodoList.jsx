@@ -55,7 +55,6 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
             onRemoveTodo={onRemoveTodo}
             onToggleComplete={onToggleComplete}
             onEditTodo={handleEditTodo}
-            createdDate={todo.createdDate}
           />
         ))}
       </ul>
