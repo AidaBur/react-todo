@@ -13,7 +13,7 @@ const AddTodoForm = ({ onAddTodo }) => {
     const newTodo = {
       title: todoTitle,
       id: Date.now(),
-      createdAt: new Date().toISOString(), 
+      createdDate: new Date().toISOString(), 
     };
 
     onAddTodo(newTodo); 

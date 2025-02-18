@@ -37,7 +37,7 @@ const App = () => {
         id: record.id,
         title: record.fields.title || "Untitled",
         completed: record.fields.completed || false,
-        createdDate: record.fields.createdDate,
+        createdDate: new Date().toISOString(),
       }));
 
       setTodoList(todos);
@@ -61,7 +61,6 @@ const App = () => {
         fields: {
           title: newTodo.title,
           completed: false,
-          createdDate: new Date().toISOString(),
         },
       }),
     };
@@ -84,7 +83,6 @@ const App = () => {
         id: data.id,
         title: data.fields.title,
         completed: data.fields.completed,
-        createdDate: data.fields.createdDate,
       };
 
       setTodoList((prevList) => [...prevList, addedTodo]);

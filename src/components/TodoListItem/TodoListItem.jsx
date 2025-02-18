@@ -9,7 +9,7 @@ const TodoListItem = ({ todo, onRemoveTodo, onToggleComplete, onEditTodo }) => {
       <div className={styles.taskContent}>
         <input
           type="checkbox"
-          checked={todo.completed}
+          checked={todo.completed ?? false} 
           onChange={() => onToggleComplete(todo.id, !todo.completed)}
           className={styles.checkbox}
         />
@@ -48,11 +48,11 @@ TodoListItem.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
+    createdDate: PropTypes.string.isRequired,  
   }).isRequired,
   onRemoveTodo: PropTypes.func.isRequired,
   onToggleComplete: PropTypes.func.isRequired,
   onEditTodo: PropTypes.func.isRequired,  
-  createdDate: PropTypes.string.isRequired,
 };
 
 export default TodoListItem;
