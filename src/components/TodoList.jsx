@@ -44,7 +44,7 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
 
 
   return (
-    <div className={styles.todoListContainer}> {/* Добавленный контейнер */}
+    <div className={styles.todoListContainer}> 
       <MenuBar />
       
       <ul className={styles.cardsContainer}>
@@ -55,6 +55,7 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
             onRemoveTodo={onRemoveTodo}
             onToggleComplete={onToggleComplete}
             onEditTodo={handleEditTodo}
+            createdDate={todo.createdDate}
           />
         ))}
       </ul>
@@ -88,7 +89,8 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
         </div>
       )}
     </div>
-  );  
+  );
+  
 };
 
 TodoList.propTypes = {

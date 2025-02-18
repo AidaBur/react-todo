@@ -13,9 +13,10 @@ const AddTodoForm = ({ onAddTodo }) => {
     const newTodo = {
       title: todoTitle,
       id: Date.now(),
+      createdAt: new Date().toLocaleString(), 
     };
 
-    onAddTodo(newTodo);
+    onAddTodo(newTodo); 
     setTodoTitle("");
   };
 
@@ -30,7 +31,7 @@ const AddTodoForm = ({ onAddTodo }) => {
         className={styles.input}
       />
       <button type="submit" className={styles.addButton}>
-      <FaPlus className={styles.buttonIcon} />
+        <FaPlus className={styles.buttonIcon} />
       </button>
     </form>
   );

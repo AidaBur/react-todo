@@ -17,6 +17,11 @@ const TodoListItem = ({ todo, onRemoveTodo, onToggleComplete, onEditTodo }) => {
           {todo.title}
         </span>
       </div>
+
+      <p className={styles.createdDate}>
+        {new Date(todo.createdDate).toLocaleDateString()}
+      </p>
+
       <div className={styles.buttonsContainer}>
         <button
           type="button"
@@ -47,6 +52,7 @@ TodoListItem.propTypes = {
   onRemoveTodo: PropTypes.func.isRequired,
   onToggleComplete: PropTypes.func.isRequired,
   onEditTodo: PropTypes.func.isRequired,  
+  createdDate: PropTypes.string.isRequired,
 };
 
 export default TodoListItem;

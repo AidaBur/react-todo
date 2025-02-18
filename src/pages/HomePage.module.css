@@ -2,7 +2,7 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background-color: #F4F0FF
+  background-color: #F4F0FF;
 }
 
 .container {
@@ -47,4 +47,10 @@ body {
   width: 100%;
   max-width: 400px;
   margin: 0 auto 20px;
+}
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  white-space: nowrap; 
 }

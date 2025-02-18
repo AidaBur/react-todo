@@ -90,3 +90,15 @@
 .saveButton:hover {
   background-color: #7a4ed1;
 }
+
+.todoDate {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 5px;
+}
+
+.createdDate {
+  font-size: 0.8rem;  /* Меньший размер шрифта */
+  color: gray;        /* Серый цвет */
+  margin-top: 5px;    /* Немного отступа сверху */
+}
