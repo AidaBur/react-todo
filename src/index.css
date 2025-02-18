@@ -83,28 +83,28 @@ li button {
 }
 
 
-/* Стиль для кнопки на активном состоянии */
+
 .filter-button.active {
   background-color: #5F33E1;
-  color: white; /* Цвет текста белый при активном состоянии */
+  color: white; 
 }
 
-/* Стиль для кнопки при наведении */
+
 .filter-button:hover {
   background-color: #5F33E1;
-  color: white; /* Цвет текста белый при наведении */
+  color: white; 
 }
 
-/* Стиль для неактивной кнопки */
+
 .filter-button:not(.active) {
-  color: #5F33E1; /* Фиолетовый цвет текста */
+  color: #5F33E1; 
   background-color: transparent;
 }
 
-/* Стиль для обычной кнопки */
+
 button:hover {
   background-color: #5F33E1;
-  color: white; /* Белый цвет текста при наведении */
+  color: white; 
 }
 
 
