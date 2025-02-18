@@ -98,7 +98,7 @@
 }
 
 .createdDate {
-  font-size: 0.8rem;  /* Меньший размер шрифта */
-  color: gray;        /* Серый цвет */
-  margin-top: 5px;    /* Немного отступа сверху */
+  font-size: 0.8rem; 
+  color: gray;        
+  margin-top: 5px;    
 }

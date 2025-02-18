@@ -12,18 +12,20 @@ const HomePage = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <img
-        src={girlWithLaptop}
-        alt="Girl with laptop"
-        className={styles.image}
-      />
-      <h1 className={styles.title}>
-        Organizing your day activity <br /> with Todo Daily
-      </h1>
-      <button className={styles.button} onClick={handleGetStartedClick}>
-        Get started
-      </button>
+    <div className={styles.pageWrapper}>
+      <div className={styles.container}>
+        <img
+          src={girlWithLaptop}
+          alt="Girl with laptop"
+          className={styles.image}
+        />
+        <h1 className={styles.title}>
+          Organizing your day activity <br /> with Todo Daily
+        </h1>
+        <button className={styles.button} onClick={handleGetStartedClick}>
+          Get started
+        </button>
+      </div>
     </div>
   );
 };

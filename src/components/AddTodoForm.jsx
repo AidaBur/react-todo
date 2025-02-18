@@ -27,7 +27,7 @@ const AddTodoForm = ({ onAddTodo }) => {
         type="text"
         value={todoTitle}
         onChange={(e) => setTodoTitle(e.target.value)}
-        placeholder="Title"
+        placeholder="Add Todo"
         className={styles.input}
       />
       <button type="submit" className={styles.addButton}>

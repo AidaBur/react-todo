@@ -3,14 +3,34 @@
 body {
   font-family: "Inter", sans-serif;
   background-color: #F4F0FF;
+  
 }
 
 .container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/src/assets/images/back-2.png'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 2rem;
+  z-index: 1; 
+}
+
+.pageWrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .title {
