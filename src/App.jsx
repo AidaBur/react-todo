@@ -48,6 +48,9 @@ const App = () => {
   };
 
   const addTodo = async (newTodo) => {
+
+    console.log("Adding todo:", newTodo);
+    
     const options = {
       method: "POST",
       headers: {
@@ -62,6 +65,7 @@ const App = () => {
         },
       }),
     };
+
 
     const url = `https://api.airtable.com/v0/${
       import.meta.env.VITE_AIRTABLE_BASE_ID
