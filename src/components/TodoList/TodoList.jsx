@@ -43,8 +43,6 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
     pageNumbers.push(i);
   }
 
-  
-
   return (
     <div className={styles.todoListContainer}>
       <MenuBar />
@@ -98,7 +96,7 @@ TodoList.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      completed: PropTypes.bool.isRequired,
+      completed: PropTypes.bool,
     })
   ).isRequired,
   onRemoveTodo: PropTypes.func.isRequired,

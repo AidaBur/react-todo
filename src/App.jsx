@@ -1,5 +1,3 @@
-//App.jsx
-
 import React, { useState, useEffect } from "react";
 import AddTodoForm from "./components/AddTodoForm/AddTodoForm";
 import TodoList from "./components/TodoList/TodoList";
@@ -15,7 +13,7 @@ const App = () => {
   const [sortByDateOrder, setSortByDateOrder] = useState("asc");
   const [sortByTitleOrder, setSortByTitleOrder] = useState("asc");
   const [filter, setFilter] = useState("all");
-
+  const [lastSortedBy, setLastSortedBy] = useState("date"); // 'date' or 'title'
 
   const fetchData = async () => {
     const options = {
@@ -111,7 +109,7 @@ const App = () => {
         throw new Error(`Error: ${response.status}`);
       }
 
-      setTodoList((prevList) => prevList.filter((todo) => todo.id !== id));
+      setTodoList((prevList) => [addedTodo, ...prevList]);
     } catch (error) {
       console.error("Error removing todo:", error.message);
     }
@@ -194,22 +192,28 @@ const App = () => {
             : todo
         )
       );
-
     } catch (error) {
       console.error("Error updating todo:", error.message);
     }
   };
 
   const sortByDateHandler = () => {
-    setSortByDateOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    setSortByDateOrder((prevOrder) => {
+      const newOrder = prevOrder === "asc" ? "desc" : "asc";
+      setLastSortedBy("date"); // Запоминаем, что сортируем по дате
+      return newOrder;
+    });
   };
 
   const sortByTitleHandler = () => {
-    setSortByTitleOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    setSortByTitleOrder((prevOrder) => {
+      const newOrder = prevOrder === "asc" ? "desc" : "asc";
+      setLastSortedBy("title"); // Запоминаем, что сортируем по заголовку
+      return newOrder;
+    });
   };
 
   const filterTodos = (todos, filter) => {
-    
     if (filter === "completed") {
       return todos.filter((todo) => todo.completed);
     } else if (filter === "inProgress") {
@@ -222,29 +226,26 @@ const App = () => {
     fetchData();
   }, []);
 
-  
-
-  const sortedByDateTodos = [...todoList].sort((a, b) => {
-    if (sortByDateOrder === "asc") {
-      return new Date(b.createdDate) - new Date(a.createdDate);
-    } else {
-      return new Date(a.createdDate) - new Date(b.createdDate);
+  // Сортировка
+  const sortedTodos = [...todoList].sort((a, b) => {
+    if (lastSortedBy === "date") {
+      if (sortByDateOrder === "asc") {
+        return new Date(a.createdDate) - new Date(b.createdDate); // По возрастанию
+      } else {
+        return new Date(b.createdDate) - new Date(a.createdDate); // По убыванию
+      }
+    } else if (lastSortedBy === "title") {
+      if (sortByTitleOrder === "asc") {
+        return a.title.localeCompare(b.title); // A-Z
+      } else {
+        return b.title.localeCompare(a.title); // Z-A
+      }
     }
   });
 
-  const sortedByTitleTodos = [...todoList].sort((a, b) => {
-    if (sortByTitleOrder === "asc") {
-      return a.title.localeCompare(b.title);
-    } else {
-      return b.title.localeCompare(a.title);
-    }
-  });
-
-  const finalSortedTodos =
-    sortByDateOrder === "asc" ? sortedByDateTodos : sortedByTitleTodos;
+  const finalSortedTodos = sortedTodos;
 
   const filteredTodos = filterTodos(finalSortedTodos, filter);
-  
 
   return (
     <BrowserRouter>
