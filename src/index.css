@@ -1,18 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
 
 body {
-  background-color: #F4F0FF;
+  background-color: #f4f0ff;
   color: #333;
   font-family: "Inter", sans-serif;
   margin: 0 auto;
   padding: 0;
   height: 100vh;
   text-align: center;
-  width: 100%;
-  max-width: 600px;
+  width: 80%;
+  max-width: 600px; 
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow-x: hidden;
 }
 
 h1,
@@ -26,7 +27,7 @@ h3 {
 }
 
 button {
-  background-color: #5F33E1;
+  background-color: #5f33e1;
   color: white;
   padding: 10px 16px;
   border: none;
@@ -36,12 +37,13 @@ button {
 }
 
 button:hover {
-   background-color: #5F33E1;
-   color: white;
+  background-color: #5f33e1;
+  color: white;
 }
+
 .sort-button {
-  background-color: #FFE4F2; 
-  color: #F478B8;
+  background-color: #ffe4f2;
+  color: #f478b8;
   padding: 10px 16px;
   border: none;
   border-radius: 20px;
@@ -50,8 +52,8 @@ button:hover {
 }
 
 .sort-button:hover {
-  background-color: #f2cbdf; 
-  color: #F478B8;
+  background-color: #f2cbdf;
+  color: #f478b8;
 }
 
 input {
@@ -68,6 +70,7 @@ form {
 ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 li {
@@ -82,31 +85,25 @@ li button {
   margin-left: auto;
 }
 
-
-
 .filter-button.active {
-  background-color: #5F33E1;
-  color: white; 
+  background-color: #5f33e1;
+  color: white;
 }
-
 
 .filter-button:hover {
-  background-color: #5F33E1;
-  color: white; 
+  background-color: #5f33e1;
+  color: white;
 }
 
-
 .filter-button:not(.active) {
-  color: #5F33E1; 
+  color: #5f33e1;
   background-color: transparent;
 }
 
-
 button:hover {
-  background-color: #5F33E1;
-  color: white; 
+  background-color: #5f33e1;
+  color: white;
 }
-
 
 @media (max-width: 768px) {
   body {
@@ -151,5 +148,45 @@ button:hover {
   li button {
     margin-left: auto;
     margin-top: 0;
+  }
+}
+
+@media (max-width: 365px) {
+  body {
+    width: 100%;
+    padding: 0;
+  }
+
+  li {
+    display: block;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    width: 100%;
+  }
+
+  li .title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  li .date {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  li .buttons-container {
+    display: block;
+    margin-top: 10px;
+  }
+
+  li .buttons-container button {
+    margin-top: 5px;
+  }
+
+  ul {
+    overflow-x: hidden;
   }
 }

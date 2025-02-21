@@ -1,8 +1,10 @@
+//App.jsx
+
 import React, { useState, useEffect } from "react";
-import AddTodoForm from "./components/AddTodoForm";
-import TodoList from "./components/TodoList";
+import AddTodoForm from "./components/AddTodoForm/AddTodoForm";
+import TodoList from "./components/TodoList/TodoList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/ NavBar";
+import Navbar from "./components/NavBar/NavBar";
 import HomePage from "./pages/HomePage";
 
 const App = () => {
@@ -12,7 +14,8 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [sortByDateOrder, setSortByDateOrder] = useState("asc");
   const [sortByTitleOrder, setSortByTitleOrder] = useState("asc");
-  const [filter, setFilter] = useState("all"); 
+  const [filter, setFilter] = useState("all");
+
 
   const fetchData = async () => {
     const options = {
@@ -36,8 +39,8 @@ const App = () => {
       const todos = data.records.map((record) => ({
         id: record.id,
         title: record.fields.title || "Untitled",
-        completed: record.fields.completed || false,
-        createdDate: new Date().toISOString(),
+        completed: Boolean(record.fields.completed),
+        createdDate: record.fields.createdDate || new Date().toISOString(),
       }));
 
       setTodoList(todos);
@@ -48,9 +51,8 @@ const App = () => {
   };
 
   const addTodo = async (newTodo) => {
-
     console.log("Adding todo:", newTodo);
-    
+
     const options = {
       method: "POST",
       headers: {
@@ -64,7 +66,6 @@ const App = () => {
         },
       }),
     };
-
 
     const url = `https://api.airtable.com/v0/${
       import.meta.env.VITE_AIRTABLE_BASE_ID
@@ -83,6 +84,7 @@ const App = () => {
         id: data.id,
         title: data.fields.title,
         completed: data.fields.completed,
+        createdDate: data.fields.createdDate || new Date().toISOString(),
       };
 
       setTodoList((prevList) => [...prevList, addedTodo]);
@@ -169,7 +171,7 @@ const App = () => {
       },
       body: JSON.stringify({
         fields: {
-          completed: completed,
+          completed: Boolean(completed),
         },
       }),
     };
@@ -192,6 +194,7 @@ const App = () => {
             : todo
         )
       );
+
     } catch (error) {
       console.error("Error updating todo:", error.message);
     }
@@ -200,16 +203,17 @@ const App = () => {
   const sortByDateHandler = () => {
     setSortByDateOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   };
-  
+
   const sortByTitleHandler = () => {
     setSortByTitleOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   };
 
   const filterTodos = (todos, filter) => {
+    
     if (filter === "completed") {
-      return todos.filter(todo => todo.completed);
+      return todos.filter((todo) => todo.completed);
     } else if (filter === "inProgress") {
-      return todos.filter(todo => !todo.completed);
+      return todos.filter((todo) => !todo.completed);
     }
     return todos; // "all" by default
   };
@@ -218,15 +222,14 @@ const App = () => {
     fetchData();
   }, []);
 
+  
+
   const sortedByDateTodos = [...todoList].sort((a, b) => {
     if (sortByDateOrder === "asc") {
-      if (new Date(a.createdDate) > new Date(b.createdDate)) return 1;
-      if (new Date(a.createdDate) < new Date(b.createdDate)) return -1;
+      return new Date(b.createdDate) - new Date(a.createdDate);
     } else {
-      if (new Date(a.createdDate) < new Date(b.createdDate)) return 1;
-      if (new Date(a.createdDate) > new Date(b.createdDate)) return -1;
+      return new Date(a.createdDate) - new Date(b.createdDate);
     }
-    return 0;
   });
 
   const sortedByTitleTodos = [...todoList].sort((a, b) => {
@@ -237,11 +240,11 @@ const App = () => {
     }
   });
 
-  
-  const finalSortedTodos = sortByDateOrder === "asc" ? sortedByDateTodos : sortedByTitleTodos;
-
+  const finalSortedTodos =
+    sortByDateOrder === "asc" ? sortedByDateTodos : sortedByTitleTodos;
 
   const filteredTodos = filterTodos(finalSortedTodos, filter);
+  
 
   return (
     <BrowserRouter>
@@ -254,31 +257,35 @@ const App = () => {
             <>
               <h1>Todo List</h1>
               <AddTodoForm onAddTodo={addTodo} />
-              
+
               <button
-                    onClick={() => setFilter("all")}
-                    className={`filter-button ${filter === "all" ? "active" : ""}`}
-                  >
-                    All
-                  </button>
-                  <button
-                    onClick={() => setFilter("completed")}
-                    className={`filter-button ${filter === "completed" ? "active" : ""}`}
-                  >
-                    Completed
-                  </button>
-                  <button
-                    onClick={() => setFilter("inProgress")}
-                    className={`filter-button ${filter === "inProgress" ? "active" : ""}`}
-                  >
-                    In Progress
-                  </button>
-                  <button className="sort-button" onClick={sortByDateHandler}>
-                    {sortByDateOrder === "asc" ? "Date ↑" : "Date ↓"}
-                  </button>
-                  <button className="sort-button" onClick={sortByTitleHandler}>
-                    {sortByTitleOrder === "asc" ? "(A-Z)" : "(Z-A)"}
-                  </button>
+                onClick={() => setFilter("all")}
+                className={`filter-button ${filter === "all" ? "active" : ""}`}
+              >
+                All
+              </button>
+              <button
+                onClick={() => setFilter("completed")}
+                className={`filter-button ${
+                  filter === "completed" ? "active" : ""
+                }`}
+              >
+                Completed
+              </button>
+              <button
+                onClick={() => setFilter("inProgress")}
+                className={`filter-button ${
+                  filter === "inProgress" ? "active" : ""
+                }`}
+              >
+                In Progress
+              </button>
+              <button className="sort-button" onClick={sortByDateHandler}>
+                {sortByDateOrder === "asc" ? "Date ↑" : "Date ↓"}
+              </button>
+              <button className="sort-button" onClick={sortByTitleHandler}>
+                {sortByTitleOrder === "asc" ? "(A-Z)" : "(Z-A)"}
+              </button>
 
               {isLoading ? (
                 <p>Loading...</p>

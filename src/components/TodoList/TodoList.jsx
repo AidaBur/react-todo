@@ -1,6 +1,8 @@
+//TodoList.jsx
+
 import React, { useState } from "react";
-import TodoListItem from "./TodoListItem/TodoListItem";
-import MenuBar from "./ NavBar";
+import TodoListItem from "../TodoListItem/TodoListItem";
+import MenuBar from "../NavBar/NavBar";
 import PropTypes from "prop-types";
 import styles from "./TodoList.module.css";
 
@@ -30,7 +32,6 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
     closeModal();
   };
 
-
   const indexOfLastTodo = currentPage * itemsPerPage;
   const indexOfFirstTodo = indexOfLastTodo - itemsPerPage;
   const currentTodos = todoList.slice(indexOfFirstTodo, indexOfLastTodo);
@@ -42,11 +43,12 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
     pageNumbers.push(i);
   }
 
+  
 
   return (
-    <div className={styles.todoListContainer}> 
+    <div className={styles.todoListContainer}>
       <MenuBar />
-      
+
       <ul className={styles.cardsContainer}>
         {currentTodos.map((todo) => (
           <TodoListItem
@@ -58,7 +60,7 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
           />
         ))}
       </ul>
-  
+
       <div className={styles.pagination}>
         {pageNumbers.map((number) => (
           <button
@@ -70,7 +72,7 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
           </button>
         ))}
       </div>
-  
+
       {isModalOpen && editableTodo && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
@@ -89,7 +91,6 @@ const TodoList = ({ todoList, onRemoveTodo, onToggleComplete, onSaveEdit }) => {
       )}
     </div>
   );
-  
 };
 
 TodoList.propTypes = {
