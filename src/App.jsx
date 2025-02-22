@@ -109,7 +109,7 @@ const App = () => {
         throw new Error(`Error: ${response.status}`);
       }
 
-      setTodoList((prevList) => [addedTodo, ...prevList]);
+      setTodoList((prevList) => prevList.filter((todo) => todo.id !== id));
     } catch (error) {
       console.error("Error removing todo:", error.message);
     }
