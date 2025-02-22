@@ -200,7 +200,7 @@ const App = () => {
   const sortByDateHandler = () => {
     setSortByDateOrder((prevOrder) => {
       const newOrder = prevOrder === "asc" ? "desc" : "asc";
-      setLastSortedBy("date"); // Запоминаем, что сортируем по дате
+      setLastSortedBy("date");
       return newOrder;
     });
   };
@@ -208,7 +208,7 @@ const App = () => {
   const sortByTitleHandler = () => {
     setSortByTitleOrder((prevOrder) => {
       const newOrder = prevOrder === "asc" ? "desc" : "asc";
-      setLastSortedBy("title"); // Запоминаем, что сортируем по заголовку
+      setLastSortedBy("title");
       return newOrder;
     });
   };
@@ -226,19 +226,18 @@ const App = () => {
     fetchData();
   }, []);
 
-  // Сортировка
   const sortedTodos = [...todoList].sort((a, b) => {
     if (lastSortedBy === "date") {
       if (sortByDateOrder === "asc") {
-        return new Date(a.createdDate) - new Date(b.createdDate); // По возрастанию
+        return new Date(b.createdDate) - new Date(a.createdDate);
       } else {
-        return new Date(b.createdDate) - new Date(a.createdDate); // По убыванию
+        return new Date(a.createdDate) - new Date(b.createdDate);
       }
     } else if (lastSortedBy === "title") {
       if (sortByTitleOrder === "asc") {
-        return a.title.localeCompare(b.title); // A-Z
+        return a.title.localeCompare(b.title);
       } else {
-        return b.title.localeCompare(a.title); // Z-A
+        return b.title.localeCompare(a.title);
       }
     }
   });
