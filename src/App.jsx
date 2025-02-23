@@ -281,7 +281,7 @@ const App = () => {
                 In Progress
               </button>
               <button className="sort-button" onClick={sortByDateHandler}>
-                {sortByDateOrder === "asc" ? "Date ↑" : "Date ↓"}
+                {sortByDateOrder === "asc" ? "Date ↓" : "Date ↑"}
               </button>
               <button className="sort-button" onClick={sortByTitleHandler}>
                 {sortByTitleOrder === "asc" ? "(A-Z)" : "(Z-A)"}
