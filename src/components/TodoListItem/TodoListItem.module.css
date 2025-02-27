@@ -22,6 +22,10 @@
   cursor: pointer;
 }
 
+.checkbox:checked {
+  background-color: #7a4ed1; 
+}
+
 .completed {
   text-decoration: line-through;
 }

@@ -13,7 +13,7 @@ const AddTodoForm = ({ onAddTodo }) => {
     const newTodo = {
       title: todoTitle,
       id: Date.now(),
-      createdAt: new Date().toLocaleString(), 
+      createdDate: new Date().toISOString(), 
     };
 
     onAddTodo(newTodo); 
@@ -27,7 +27,7 @@ const AddTodoForm = ({ onAddTodo }) => {
         type="text"
         value={todoTitle}
         onChange={(e) => setTodoTitle(e.target.value)}
-        placeholder="Add Todo"
+        placeholder="title"
         className={styles.input}
       />
       <button type="submit" className={styles.addButton}>

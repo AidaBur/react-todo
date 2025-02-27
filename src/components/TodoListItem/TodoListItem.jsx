@@ -1,5 +1,7 @@
+// TodoListItem.jsx
+
 import React from "react";
-import { FaTrash, FaEdit } from "react-icons/fa";  
+import { FaTrash, FaEdit } from "react-icons/fa";
 import PropTypes from "prop-types";
 import styles from "./TodoListItem.module.css";
 
@@ -9,7 +11,7 @@ const TodoListItem = ({ todo, onRemoveTodo, onToggleComplete, onEditTodo }) => {
       <div className={styles.taskContent}>
         <input
           type="checkbox"
-          checked={todo.completed}
+          checked={todo.completed ?? false}
           onChange={() => onToggleComplete(todo.id, !todo.completed)}
           className={styles.checkbox}
         />
@@ -30,10 +32,10 @@ const TodoListItem = ({ todo, onRemoveTodo, onToggleComplete, onEditTodo }) => {
         >
           <FaTrash />
         </button>
-       
+
         <button
           type="button"
-          onClick={() => onEditTodo(todo)}  
+          onClick={() => onEditTodo(todo)}
           className={styles.editButton}
         >
           <FaEdit />
@@ -47,12 +49,12 @@ TodoListItem.propTypes = {
   todo: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    completed: PropTypes.bool.isRequired,
+    completed: PropTypes.bool,
+    createdDate: PropTypes.string.isRequired,
   }).isRequired,
   onRemoveTodo: PropTypes.func.isRequired,
   onToggleComplete: PropTypes.func.isRequired,
-  onEditTodo: PropTypes.func.isRequired,  
-  createdDate: PropTypes.string.isRequired,
+  onEditTodo: PropTypes.func.isRequired,
 };
 
 export default TodoListItem;
