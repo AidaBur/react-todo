@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FaHome, FaList } from "react-icons/fa";
 
-import styles from "./Navbar.module.css";
+import styles from "./NavBar.module.css";
 
 const Navbar = () => {
   return (
